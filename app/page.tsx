@@ -50,19 +50,19 @@ export default function Home() {
       experienceTitle: "経験 & 資格",
       experience: [
         {
-          title: "Techzenでのインターン開発者",
+          title: "Techzen有限会社 (フルスタック開発インターン)",
           period: "2024年8月 - 2025年7月",
-          desc: "JavaとSpring Bootを使用したアプリケーション開発。",
+          desc: "JavaとSpring Bootを使用したアプリケーション開発、React Nativeを使用したフロントエンド開発にも参加。",
         },
         {
-          title: "インターン開発者 [Tên công ty này]",
-          period: "2025年6月 - 2025年9月",
-          desc: "ウェブアプリケーションの開発と保守、React Nativeを使用したプロジェクトに貢献。",
+          title: "マイナビ テクタス ベトナム 株式会社 (バックエンド開発インターン)",
+          period: "2025年7月 - 2025年9月",
+          desc: "バックエンドシステムの開発と保守、Spring BootおよびRESTful APIを使用したプロジェクトに貢献。",
         },
       ],
       certifications: [
         {
-          title: "Teso Hackathon 2024",
+          title: "Tetote Hackathon 2024",
           period: "2024年5月",
           desc: "成績: 4位",
         },
@@ -122,19 +122,19 @@ export default function Home() {
       experienceTitle: "Experience & Certifications",
       experience: [
         {
-          title: "Intern Developer at Techzen",
+          title: "Techzen Co., Ltd. (Full-Stack Developer Intern)",
           period: "Aug 2024 - Jul 2025",
-          desc: "Application development using Java and Spring Boot.",
+          desc: "Developed applications using Java and Spring Boot, also contributed to frontend development with React Native.",
         },
         {
-          title: "Intern Developer at [Tên công ty này]",
-          period: "Jun 2025 - Sep 2025",
-          desc: "Contributed to web application development and maintenance, worked on projects using React Native.",
+          title: "Mynavi Tectus Vietnam Co., Ltd. (Backend Developer Intern)",
+          period: "Jul 2025 - Sep 2025",
+          desc: "Contributed to backend system development and maintenance, working on projects using Spring Boot and RESTful APIs.",
         },
       ],
       certifications: [
         {
-          title: "Teso Hackathon 2024",
+          title: "Tetote Hackathon 2024",
           period: "May 2024",
           desc: "Rank: 4th Place",
         },
@@ -242,19 +242,19 @@ export default function Home() {
         <h2 className="text-4xl font-semibold text-purple-700 dark:text-purple-300 mb-6 text-center">{skillsTitle}</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className={`${darkMode ? "bg-gray-800 border-gray-700" : "bg-white border-gray-200"} p-6 rounded-lg shadow-lg hover:scale-105 transition border`}>
-            <h3 className="text-2xl font-bold mb-4 flex items-center text-gray-800 dark:text-gray-100"><FaJava className="mr-2 text-purple-500 dark:text-purple-300" /> {skills.lang}</h3>
+            <h3 className="text-2xl font-bold mb-4 flex items-center text-purple-600 dark:text-purple-300"><FaJava className="mr-2 text-purple-500 dark:text-purple-300" /> {skills.lang}</h3>
             <ul className="list-disc pl-5 space-y-2 text-gray-600 dark:text-gray-300">
               {skills.items[0].map((skill, index) => <li key={index}>{skill}</li>)}
             </ul>
           </div>
           <div className={`${darkMode ? "bg-gray-800 border-gray-700" : "bg-white border-gray-200"} p-6 rounded-lg shadow-lg hover:scale-105 transition border`}>
-            <h3 className="text-2xl font-bold mb-4 flex items-center text-gray-800 dark:text-gray-100"><FaDocker className="mr-2 text-purple-500 dark:text-purple-300" /> {skills.tools}</h3>
+            <h3 className="text-2xl font-bold mb-4 flex items-center text-purple-600 dark:text-purple-300"><FaDocker className="mr-2 text-purple-500 dark:text-purple-300" /> {skills.tools}</h3>
             <ul className="list-disc pl-5 space-y-2 text-gray-600 dark:text-gray-300">
               {skills.items[1].map((skill, index) => <li key={index}>{skill}</li>)}
             </ul>
           </div>
           <div className={`${darkMode ? "bg-gray-800 border-gray-700" : "bg-white border-gray-200"} p-6 rounded-lg shadow-lg hover:scale-105 transition border`}>
-            <h3 className="text-2xl font-bold mb-4 flex items-center text-gray-800 dark:text-gray-100"><FaDatabase className="mr-2 text-purple-500 dark:text-purple-300" /> {skills.other}</h3>
+            <h3 className="text-2xl font-bold mb-4 flex items-center text-purple-600 dark:text-purple-300"><FaDatabase className="mr-2 text-purple-500 dark:text-purple-300" /> {skills.other}</h3>
             <ul className="list-disc pl-5 space-y-2 text-gray-600 dark:text-gray-300">
               {skills.items[2].map((skill, index) => <li key={index}>{skill}</li>)}
             </ul>
@@ -287,25 +287,25 @@ export default function Home() {
         <h2 className="text-4xl font-semibold text-purple-700 dark:text-purple-300 mb-6 text-center">{experienceTitle}</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className={`${darkMode ? "bg-gray-800 border-gray-700" : "bg-white border-gray-200"} p-6 rounded-lg shadow-lg border`}>
-            <h3 className="text-2xl font-bold mb-4 text-gray-800 dark:text-gray-100">Experience</h3>
+            <h3 className="text-2xl font-bold mb-4 text-purple-600 dark:text-purple-300">Experience</h3>
             <ul className="space-y-4 text-gray-600 dark:text-gray-300">
               {experience.map((exp, index) => (
                 <li key={index}>
-                  <strong className="text-gray-800 dark:text-gray-100">{exp.title}</strong><br />
-                  <span className="text-gray-500 dark:text-gray-400">{exp.period}</span><br />
+                  <strong className="text-gray-800 dark:text-gray-100 font-semibold">{exp.title}</strong><br />
+                  <span className="text-gray-500 dark:text-gray-400 text-sm">{exp.period}</span><br />
                   {exp.desc}
                 </li>
               ))}
             </ul>
           </div>
           <div className={`${darkMode ? "bg-gray-800 border-gray-700" : "bg-white border-gray-200"} p-6 rounded-lg shadow-lg border`}>
-            <h3 className="text-2xl font-bold mb-4 text-gray-800 dark:text-gray-100">Certifications</h3>
+            <h3 className="text-2xl font-bold mb-4 text-purple-600 dark:text-purple-300">Certifications</h3>
             <ul className="space-y-4 text-gray-600 dark:text-gray-300">
               {certifications.map((cert, index) => (
                 <li key={index}>
-                  <strong className="text-gray-800 dark:text-gray-100">{cert.title}</strong><br />
-                  <span className="text-gray-500 dark:text-gray-400">{cert.period}</span><br />
-                  {cert.desc}
+                  <strong className="text-gray-800 dark:text-gray-100 font-semibold">{cert.title}</strong><br />
+                  <span className="text-gray-500 dark:text-gray-400 text-sm">{cert.period}</span><br />
+                  {cert.desc && <span className="text-gray-600 dark:text-gray-300">{cert.desc}</span>}
                 </li>
               ))}
             </ul>
@@ -337,7 +337,7 @@ export default function Home() {
                   className="object-contain"
                 />
               </div>
-              <h3 className="text-2xl font-bold mb-2 text-gray-800 dark:text-gray-100">{project.name}</h3>
+              <h3 className="text-2xl font-bold mb-2 text-gray-800 dark:text-gray-100 font-semibold">{project.name}</h3>
               <p className="mb-2 text-gray-600 dark:text-gray-300">Tech: {project.tech}</p>
               <p className="text-gray-600 dark:text-gray-300">{project.desc}</p>
               <div className="mt-auto space-x-4">
