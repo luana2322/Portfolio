@@ -76,40 +76,46 @@ export default function Home() {
       projects: [
         {
           name: "E-TechPlaza",
+          image: "/images/e-techplaza.png",
           tech: "Java/Spring Boot, HTML/CSS/JavaScript/Thymeleaf",
           desc: "オンライン販売管理システム。",
           link: "https://github.com/luana2322/E-TechPlaza",
         },
         {
           name: "HiveHub",
+          image: "/images/hivehub.png",
           tech: "Java/Spring Boot, React Native, MySQL",
           desc: "コミュニティ接続アプリケーション。",
           link: "https://github.com/luana2322/HiveHub",
         },
         {
           name: "FitMeet",
+          image: "/images/fitmeet.png",
           tech: "Java/Spring Boot, Java/XML, WebRTC",
           desc: "フィットネスに特化したオンラインミーティングアプリ。",
           link: "https://github.com/luana2322/FitMeet",
         },
         {
           name: "Snake Game",
+          image: "/images/snake game.png",
           tech: "JavaScript/HTML/CSS (推定)",
           desc: "シンプルなスネークゲーム。Facebookで公開されたデモ動画あり。",
           link: "https://github.com/luana2322/snakegame",
           demo: "https://www.facebook.com/100080772817243/videos/898712848208298/",
         },
         {
-          "name": "USER-MANAGE-SPRING-MONGODB-MINIO",
-          "tech": "Spring Boot, MongoDB, Flutter, MinIO",
-          "desc": "MongoDBを使用したCRUD管理アプリで、Spring Bootバックエンド、Flutterフロントエンド、MinIOによるファイルストレージを実装。",
-          "link": "https://github.com/luana2322/USER-MANAGE-SPRING-MONGODB-MINIO.git"
+          name: "USER-MANAGE-SPRING-MONGODB-MINIO",
+          image: "/images/user-manage-spring-mongodb-minio.png",
+          tech: "Spring Boot, MongoDB, Flutter, MinIO",
+          desc: "MongoDBを使用したCRUD管理アプリで、Spring Bootバックエンド、Flutterフロントエンド、MinIOによるファイルストレージを実装。",
+          link: "https://github.com/luana2322/USER-MANAGE-SPRING-MONGODB-MINIO.git"
         },
         {
-          "name": "FYN-Find-Your-Network-Live-Your-World",
-          "tech": "Microservices, Spring Boot,FastAPI,Flutler,Minio,Docker, REST API",
-          "desc": "マイクロサービスを用いたソーシャルネットワーキングアプリケーション。",
-          "link": "https://github.com/luana2322/fyn-monolithic"
+          name: "FYN-Find-Your-Network-Live-Your-World",
+          image: "/images/FYN-Find-Your-Network-Live-Your-World.png",
+          tech: "Microservices, Spring Boot, FastAPI, Flutter, MinIO, Docker, REST API",
+          desc: "マイクロサービスを用いたソーシャルネットワーキングアプリケーション。",
+          link: "https://github.com/luana2322/fyn-monolithic"
         },
       ],
       footer: "© 2025 タイ・グエン・バオ・ルアン。無断転載を禁じます。",
@@ -160,28 +166,46 @@ export default function Home() {
       projects: [
         {
           name: "E-TechPlaza",
+          image: "/images/e-techplaza.png",
           tech: "Java/Spring Boot, HTML/CSS/JavaScript/Thymeleaf",
           desc: "Online sales management system.",
           link: "https://github.com/luana2322/E-TechPlaza",
         },
         {
           name: "HiveHub",
+          image: "/images/hivehub.png",
           tech: "Java/Spring Boot, React Native, MySQL",
           desc: "Community connection application.",
           link: "https://github.com/luana2322/HiveHub",
         },
         {
           name: "FitMeet",
+          image: "/images/fitmeet.png",
           tech: "Java/Spring Boot, Java/XML, WebRTC",
           desc: "Fitness-focused online meeting app.",
           link: "https://github.com/luana2322/FitMeet",
         },
         {
           name: "Snake Game",
+          image: "/images/snake game.png",
           tech: "JavaScript/HTML/CSS (Estimated)",
           desc: "A simple snake game with a demo video published on Facebook.",
           link: "https://github.com/luana2322/snakegame",
           demo: "https://www.facebook.com/100080772817243/videos/898712848208298/",
+        },
+        {
+          name: "USER-MANAGE-SPRING-MONGODB-MINIO",
+          image: "/images/user-manage-spring-mongodb-minio.png",
+          tech: "Spring Boot, MongoDB, Flutter, MinIO",
+          desc: "CRUD management app with Spring Boot backend, Flutter frontend, and MinIO file storage.",
+          link: "https://github.com/luana2322/USER-MANAGE-SPRING-MONGODB-MINIO.git"
+        },
+        {
+          name: "FYN-Find-Your-Network-Live-Your-World",
+          image: "/images/FYN-Find-Your-Network-Live-Your-World.png",
+          tech: "Microservices, Spring Boot, FastAPI, Flutter, MinIO, Docker, REST API",
+          desc: "A social networking application built with microservices architecture.",
+          link: "https://github.com/luana2322/fyn-monolithic"
         },
       ],
       footer: "© 2025 Thai Nguyen Bao Luan. All rights reserved.",
@@ -231,7 +255,7 @@ export default function Home() {
         transition={{ duration: 0.8 }}
         className="text-center py-20"
       >
-        <Image src="/images/profile.jpg" alt={title} width={150} height={150} className="rounded-full mx-auto mb-4 border-4 border-purple-500 dark:border-purple-300" />
+        <Image src="/images/profile.png" alt={title} width={150} height={150} className="rounded-full mx-auto mb-4 border-4 border-purple-500 dark:border-purple-300" />
         <h1 className="text-5xl font-bold text-purple-700 dark:text-purple-300 dark:[text-shadow:_0_1px_3px_rgba(0,0,0,0.4)] mb-4">{title}</h1>
         <p className="text-2xl mb-2 text-gray-700 dark:text-gray-200">Male, 21 (Born: Jan 1, 2004)</p>
         <p className="text-xl mb-6 text-gray-600 dark:text-gray-300">{role}</p>
@@ -343,7 +367,7 @@ export default function Home() {
             >
               <div className="relative w-full h-48 mb-4 overflow-hidden rounded">
                 <Image
-                  src={`/images/${project.name.toLowerCase()}.png`}
+                  src={project.image}
                   alt={project.name}
                   fill
                   className="object-contain"
