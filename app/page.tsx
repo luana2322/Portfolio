@@ -264,7 +264,7 @@ export default function Home() {
           <a href="tel:[your-phone]" className={`${darkMode ? "bg-green-600 hover:bg-green-500" : "bg-green-500 hover:bg-green-600"} text-white px-6 py-3 rounded-lg hover:scale-105 transition transform`}>Phone</a>
           <a href="https://github.com/luana2322" className={`${darkMode ? "bg-gray-700 hover:bg-gray-600" : "bg-gray-800 hover:bg-gray-700"} text-white px-6 py-3 rounded-lg hover:scale-105 transition transform`}>GitHub</a>
         </div>
-        <p className="max-w-2xl mx-auto text-gray-700 dark:text-gray-300">{about}</p>
+        <p className="max-w-2xl mx-auto text-gray-800 dark:text-gray-300">{about}</p>
       </motion.section>
 
       {/* Skills */}
@@ -279,19 +279,19 @@ export default function Home() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className={`${darkMode ? "bg-gray-800 border-gray-700" : "bg-white border-gray-200"} p-6 rounded-lg shadow-lg hover:scale-105 transition border`}>
             <h3 className="text-2xl font-bold mb-4 flex items-center text-purple-700 dark:text-purple-300"><FaJava className="mr-2 text-purple-600 dark:text-purple-300" /> {skills.lang}</h3>
-            <ul className="list-disc pl-5 space-y-2 text-gray-600 dark:text-gray-300">
+            <ul className="list-disc pl-5 space-y-2 text-gray-800 dark:text-gray-300">
               {skills.items[0].map((skill, index) => <li key={index}>{skill}</li>)}
             </ul>
           </div>
           <div className={`${darkMode ? "bg-gray-800 border-gray-700" : "bg-white border-gray-200"} p-6 rounded-lg shadow-lg hover:scale-105 transition border`}>
             <h3 className="text-2xl font-bold mb-4 flex items-center text-purple-700 dark:text-purple-300"><FaDocker className="mr-2 text-purple-600 dark:text-purple-300" /> {skills.tools}</h3>
-            <ul className="list-disc pl-5 space-y-2 text-gray-600 dark:text-gray-300">
+            <ul className="list-disc pl-5 space-y-2 text-gray-800 dark:text-gray-300">
               {skills.items[1].map((skill, index) => <li key={index}>{skill}</li>)}
             </ul>
           </div>
           <div className={`${darkMode ? "bg-gray-800 border-gray-700" : "bg-white border-gray-200"} p-6 rounded-lg shadow-lg hover:scale-105 transition border`}>
             <h3 className="text-2xl font-bold mb-4 flex items-center text-purple-700 dark:text-purple-300"><FaDatabase className="mr-2 text-purple-600 dark:text-purple-300" /> {skills.other}</h3>
-            <ul className="list-disc pl-5 space-y-2 text-gray-600 dark:text-gray-300">
+            <ul className="list-disc pl-5 space-y-2 text-gray-800 dark:text-gray-300">
               {skills.items[2].map((skill, index) => <li key={index}>{skill}</li>)}
             </ul>
           </div>
@@ -308,7 +308,7 @@ export default function Home() {
       >
         <h2 className="text-4xl font-semibold text-purple-800 dark:text-purple-300 mb-6 text-center">{educationTitle}</h2>
         <div className={`${darkMode ? "bg-gray-800 border-gray-700" : "bg-white border-gray-200"} p-6 rounded-lg shadow-lg border`}>
-          <p className="text-gray-700 dark:text-gray-300">{education}</p>
+          <p className="text-gray-800 dark:text-gray-300">{education}</p>
         </div>
       </motion.section>
 
@@ -324,11 +324,11 @@ export default function Home() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className={`${darkMode ? "bg-gray-800 border-gray-700" : "bg-white border-gray-200"} p-6 rounded-lg shadow-lg border`}>
             <h3 className="text-2xl font-bold mb-4 text-purple-700 dark:text-purple-300">Experience</h3>
-            <ul className="space-y-4 text-gray-600 dark:text-gray-300">
+            <ul className="space-y-4 text-gray-800 dark:text-gray-300">
               {experience.map((exp, index) => (
                 <li key={index}>
                   <strong className="text-gray-800 dark:text-gray-50 dark:[text-shadow:_0_1px_2px_rgba(0,0,0,0.3)] font-semibold">{exp.title}</strong><br />
-                  <span className="text-gray-500 dark:text-gray-400 text-sm">{exp.period}</span><br />
+                  <span className="text-gray-600 dark:text-gray-400 text-sm">{exp.period}</span><br />
                   {exp.desc}
                 </li>
               ))}
@@ -336,12 +336,12 @@ export default function Home() {
           </div>
           <div className={`${darkMode ? "bg-gray-800 border-gray-700" : "bg-white border-gray-200"} p-6 rounded-lg shadow-lg border`}>
             <h3 className="text-2xl font-bold mb-4 text-purple-700 dark:text-purple-300">Certifications</h3>
-            <ul className="space-y-4 text-gray-600 dark:text-gray-300">
+            <ul className="space-y-4 text-gray-800 dark:text-gray-300">
               {certifications.map((cert, index) => (
                 <li key={index}>
                   <strong className="text-gray-800 dark:text-gray-50 dark:[text-shadow:_0_1px_2px_rgba(0,0,0,0.3)] font-semibold">{cert.title}</strong><br />
-                  <span className="text-gray-500 dark:text-gray-400 text-sm">{cert.period}</span><br />
-                  {cert.desc && <span className="text-gray-600 dark:text-gray-300">{cert.desc}</span>}
+                  <span className="text-gray-600 dark:text-gray-400 text-sm">{cert.period}</span><br />
+                  {cert.desc && <span className="text-gray-800 dark:text-gray-300">{cert.desc}</span>}
                 </li>
               ))}
             </ul>
