@@ -42,7 +42,7 @@ export default function Home() {
         items: [
           ["Java", "Python", "JavaScript", "React Native", "Vue.js", "Spring Boot", "FastAPI"],
           ["Git/GitHub", "Postman", "Visual Studio Code", "IntelliJ", "Spring Tool Suite", "Docker", "PyCharm"],
-          [ "MongoDB/MySQL", "MVCパターン", "Agile/Scrum", "OOP", "RESTful API", "WebRTC"],
+          ["MongoDB/MySQL", "MVCパターン", "Agile/Scrum", "OOP", "RESTful API", "WebRTC"],
         ],
       },
       educationTitle: "学歴",
@@ -99,18 +99,18 @@ export default function Home() {
           link: "https://github.com/luana2322/snakegame",
           demo: "https://www.facebook.com/100080772817243/videos/898712848208298/",
         },
-    { 
-      "name": "USER-MANAGE-SPRING-MONGODB-MINIO",
-      "tech": "Spring Boot, MongoDB, Flutter, MinIO",
-      "desc": "MongoDBを使用したCRUD管理アプリで、Spring Bootバックエンド、Flutterフロントエンド、MinIOによるファイルストレージを実装。",
-      "link": "https://github.com/luana2322/USER-MANAGE-SPRING-MONGODB-MINIO.git"
-    },
-    { 
-      "name": "FYN-Find-Your-Network-Live-Your-World",
-      "tech": "Microservices, Spring Boot,FastAPI,Flutler,Minio,Docker, REST API",
-      "desc": "マイクロサービスを用いたソーシャルネットワーキングアプリケーション。",
-      "link": "https://github.com/luana2322/FYN-Find-Your-Network-Live-Your-World.git"
-    },
+        {
+          "name": "USER-MANAGE-SPRING-MONGODB-MINIO",
+          "tech": "Spring Boot, MongoDB, Flutter, MinIO",
+          "desc": "MongoDBを使用したCRUD管理アプリで、Spring Bootバックエンド、Flutterフロントエンド、MinIOによるファイルストレージを実装。",
+          "link": "https://github.com/luana2322/USER-MANAGE-SPRING-MONGODB-MINIO.git"
+        },
+        {
+          "name": "FYN-Find-Your-Network-Live-Your-World",
+          "tech": "Microservices, Spring Boot,FastAPI,Flutler,Minio,Docker, REST API",
+          "desc": "マイクロサービスを用いたソーシャルネットワーキングアプリケーション。",
+          "link": "https://github.com/luana2322/fyn-monolithic"
+        },
       ],
       footer: "© 2025 タイ・グエン・バオ・ルアン。無断転載を禁じます。",
     },
@@ -201,9 +201,9 @@ export default function Home() {
       <nav className={`fixed top-0 left-0 right-0 ${darkMode ? "bg-gray-800/90 text-gray-100" : "bg-white/80 text-gray-800"} backdrop-blur-md p-4 flex justify-between items-center shadow-md transition-colors duration-300`}>
         <h1 className="text-2xl font-bold text-purple-600 dark:text-purple-300 dark:[text-shadow:_0_1px_2px_rgba(0,0,0,0.3)]">{title}</h1>
         <div className="flex space-x-6 items-center">
-          <select 
-            value={lang} 
-            onChange={changeLanguage} 
+          <select
+            value={lang}
+            onChange={changeLanguage}
             className={`${darkMode ? "bg-gray-700 text-gray-100" : "bg-white text-gray-800"} p-2 rounded border ${darkMode ? "border-gray-600" : "border-gray-300"} focus:outline-none focus:ring-2 focus:ring-purple-500`}
           >
             <option value="ja">日本語</option>
@@ -214,8 +214,8 @@ export default function Home() {
           <a href="#education" className="hover:text-purple-500 dark:hover:text-purple-300 transition-colors">Education</a>
           <a href="#experience" className="hover:text-purple-500 dark:hover:text-purple-300 transition-colors">Experience</a>
           <a href="#projects" className="hover:text-purple-500 dark:hover:text-purple-300 transition-colors">Projects</a>
-          <button 
-            onClick={toggleDarkMode} 
+          <button
+            onClick={toggleDarkMode}
             className={`${darkMode ? "bg-gray-700 text-gray-100" : "bg-gray-200 text-gray-800"} px-4 py-2 rounded hover:bg-purple-500 hover:text-white transition-colors`}
           >
             {darkMode ? "Light Mode" : "Dark Mode"}
@@ -224,10 +224,10 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <motion.section 
+      <motion.section
         id="about"
-        initial={{ opacity: 0, y: 50 }} 
-        animate={{ opacity: 1, y: 0 }} 
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
         className="text-center py-20"
       >
@@ -244,10 +244,10 @@ export default function Home() {
       </motion.section>
 
       {/* Skills */}
-      <motion.section 
+      <motion.section
         id="skills"
-        initial={{ opacity: 0 }} 
-        whileInView={{ opacity: 1 }} 
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
         className="mb-12"
       >
@@ -275,10 +275,10 @@ export default function Home() {
       </motion.section>
 
       {/* Education */}
-      <motion.section 
+      <motion.section
         id="education"
-        initial={{ opacity: 0 }} 
-        whileInView={{ opacity: 1 }} 
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
         className="mb-12"
       >
@@ -289,10 +289,10 @@ export default function Home() {
       </motion.section>
 
       {/* Experience & Certifications */}
-      <motion.section 
+      <motion.section
         id="experience"
-        initial={{ opacity: 0 }} 
-        whileInView={{ opacity: 1 }} 
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
         className="mb-12"
       >
@@ -326,26 +326,26 @@ export default function Home() {
       </motion.section>
 
       {/* Projects */}
-      <motion.section 
+      <motion.section
         id="projects"
-        initial={{ opacity: 0 }} 
-        whileInView={{ opacity: 1 }} 
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
         className="mb-12"
       >
         <h2 className="text-4xl font-semibold text-purple-700 dark:text-purple-300 mb-6 text-center">{projectsTitle}</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {projects.map((project, index) => (
-            <motion.div 
-              key={index} 
-              whileHover={{ scale: 1.05 }} 
+            <motion.div
+              key={index}
+              whileHover={{ scale: 1.05 }}
               className={`${darkMode ? "bg-gray-800 border-gray-700" : "bg-white border-gray-200"} p-6 rounded-lg shadow-lg flex flex-col border`}
             >
               <div className="relative w-full h-48 mb-4 overflow-hidden rounded">
-                <Image 
-                  src={`/images/${project.name.toLowerCase()}.png`} 
-                  alt={project.name} 
-                  fill 
+                <Image
+                  src={`/images/${project.name.toLowerCase()}.png`}
+                  alt={project.name}
+                  fill
                   className="object-contain"
                 />
               </div>
