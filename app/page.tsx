@@ -220,7 +220,7 @@ export default function Home() {
   }
 
   return (
-    <main className={`${darkMode ? "bg-gray-900 text-gray-100" : "bg-gradient-to-b from-blue-100 to-purple-100 text-gray-800"} min-h-screen p-8 transition-colors duration-300`}>
+    <main className={`${darkMode ? "bg-gray-900 text-gray-100" : "bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50 text-gray-900"} min-h-screen p-8 transition-colors duration-300`}>
       {/* Navbar */}
       <nav className={`fixed top-0 left-0 right-0 ${darkMode ? "bg-gray-800/90 text-gray-100" : "bg-white/80 text-gray-800"} backdrop-blur-md p-4 flex justify-between items-center shadow-md transition-colors duration-300`}>
         <h1 className="text-2xl font-bold text-purple-600 dark:text-purple-300 dark:[text-shadow:_0_1px_2px_rgba(0,0,0,0.3)]">{title}</h1>
@@ -256,15 +256,15 @@ export default function Home() {
         className="text-center py-20"
       >
         <Image src="/images/profile.png" alt={title} width={150} height={150} className="rounded-full mx-auto mb-4 border-4 border-purple-500 dark:border-purple-300" />
-        <h1 className="text-5xl font-bold text-purple-700 dark:text-purple-300 dark:[text-shadow:_0_1px_3px_rgba(0,0,0,0.4)] mb-4">{title}</h1>
-        <p className="text-2xl mb-2 text-gray-700 dark:text-gray-200">Male, 21 (Born: Jan 1, 2004)</p>
-        <p className="text-xl mb-6 text-gray-600 dark:text-gray-300">{role}</p>
+        <h1 className="text-5xl font-bold text-purple-800 dark:text-purple-300 dark:[text-shadow:_0_1px_3px_rgba(0,0,0,0.4)] mb-4">{title}</h1>
+        <p className="text-2xl mb-2 text-gray-800 dark:text-gray-200">Male, 21 (Born: Jan 1, 2004)</p>
+        <p className="text-xl mb-6 text-gray-700 dark:text-gray-300">{role}</p>
         <div className="flex justify-center space-x-4 mb-6">
           <a href="mailto:[your-email@example.com]" className={`${darkMode ? "bg-blue-600 hover:bg-blue-500" : "bg-blue-500 hover:bg-blue-600"} text-white px-6 py-3 rounded-lg hover:scale-105 transition transform`}>Email</a>
           <a href="tel:[your-phone]" className={`${darkMode ? "bg-green-600 hover:bg-green-500" : "bg-green-500 hover:bg-green-600"} text-white px-6 py-3 rounded-lg hover:scale-105 transition transform`}>Phone</a>
           <a href="https://github.com/luana2322" className={`${darkMode ? "bg-gray-700 hover:bg-gray-600" : "bg-gray-800 hover:bg-gray-700"} text-white px-6 py-3 rounded-lg hover:scale-105 transition transform`}>GitHub</a>
         </div>
-        <p className="max-w-2xl mx-auto text-gray-600 dark:text-gray-300">{about}</p>
+        <p className="max-w-2xl mx-auto text-gray-700 dark:text-gray-300">{about}</p>
       </motion.section>
 
       {/* Skills */}
@@ -275,22 +275,22 @@ export default function Home() {
         transition={{ duration: 0.8 }}
         className="mb-12"
       >
-        <h2 className="text-4xl font-semibold text-purple-700 dark:text-purple-300 mb-6 text-center">{skillsTitle}</h2>
+        <h2 className="text-4xl font-semibold text-purple-800 dark:text-purple-300 mb-6 text-center">{skillsTitle}</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className={`${darkMode ? "bg-gray-800 border-gray-700" : "bg-white border-gray-200"} p-6 rounded-lg shadow-lg hover:scale-105 transition border`}>
-            <h3 className="text-2xl font-bold mb-4 flex items-center text-purple-600 dark:text-purple-300"><FaJava className="mr-2 text-purple-500 dark:text-purple-300" /> {skills.lang}</h3>
+            <h3 className="text-2xl font-bold mb-4 flex items-center text-purple-700 dark:text-purple-300"><FaJava className="mr-2 text-purple-600 dark:text-purple-300" /> {skills.lang}</h3>
             <ul className="list-disc pl-5 space-y-2 text-gray-600 dark:text-gray-300">
               {skills.items[0].map((skill, index) => <li key={index}>{skill}</li>)}
             </ul>
           </div>
           <div className={`${darkMode ? "bg-gray-800 border-gray-700" : "bg-white border-gray-200"} p-6 rounded-lg shadow-lg hover:scale-105 transition border`}>
-            <h3 className="text-2xl font-bold mb-4 flex items-center text-purple-600 dark:text-purple-300"><FaDocker className="mr-2 text-purple-500 dark:text-purple-300" /> {skills.tools}</h3>
+            <h3 className="text-2xl font-bold mb-4 flex items-center text-purple-700 dark:text-purple-300"><FaDocker className="mr-2 text-purple-600 dark:text-purple-300" /> {skills.tools}</h3>
             <ul className="list-disc pl-5 space-y-2 text-gray-600 dark:text-gray-300">
               {skills.items[1].map((skill, index) => <li key={index}>{skill}</li>)}
             </ul>
           </div>
           <div className={`${darkMode ? "bg-gray-800 border-gray-700" : "bg-white border-gray-200"} p-6 rounded-lg shadow-lg hover:scale-105 transition border`}>
-            <h3 className="text-2xl font-bold mb-4 flex items-center text-purple-600 dark:text-purple-300"><FaDatabase className="mr-2 text-purple-500 dark:text-purple-300" /> {skills.other}</h3>
+            <h3 className="text-2xl font-bold mb-4 flex items-center text-purple-700 dark:text-purple-300"><FaDatabase className="mr-2 text-purple-600 dark:text-purple-300" /> {skills.other}</h3>
             <ul className="list-disc pl-5 space-y-2 text-gray-600 dark:text-gray-300">
               {skills.items[2].map((skill, index) => <li key={index}>{skill}</li>)}
             </ul>
@@ -306,9 +306,9 @@ export default function Home() {
         transition={{ duration: 0.8 }}
         className="mb-12"
       >
-        <h2 className="text-4xl font-semibold text-purple-700 dark:text-purple-300 mb-6 text-center">{educationTitle}</h2>
+        <h2 className="text-4xl font-semibold text-purple-800 dark:text-purple-300 mb-6 text-center">{educationTitle}</h2>
         <div className={`${darkMode ? "bg-gray-800 border-gray-700" : "bg-white border-gray-200"} p-6 rounded-lg shadow-lg border`}>
-          <p className="text-gray-600 dark:text-gray-300">{education}</p>
+          <p className="text-gray-700 dark:text-gray-300">{education}</p>
         </div>
       </motion.section>
 
@@ -320,10 +320,10 @@ export default function Home() {
         transition={{ duration: 0.8 }}
         className="mb-12"
       >
-        <h2 className="text-4xl font-semibold text-purple-700 dark:text-purple-300 mb-6 text-center">{experienceTitle}</h2>
+        <h2 className="text-4xl font-semibold text-purple-800 dark:text-purple-300 mb-6 text-center">{experienceTitle}</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className={`${darkMode ? "bg-gray-800 border-gray-700" : "bg-white border-gray-200"} p-6 rounded-lg shadow-lg border`}>
-            <h3 className="text-2xl font-bold mb-4 text-purple-600 dark:text-purple-300">Experience</h3>
+            <h3 className="text-2xl font-bold mb-4 text-purple-700 dark:text-purple-300">Experience</h3>
             <ul className="space-y-4 text-gray-600 dark:text-gray-300">
               {experience.map((exp, index) => (
                 <li key={index}>
@@ -335,7 +335,7 @@ export default function Home() {
             </ul>
           </div>
           <div className={`${darkMode ? "bg-gray-800 border-gray-700" : "bg-white border-gray-200"} p-6 rounded-lg shadow-lg border`}>
-            <h3 className="text-2xl font-bold mb-4 text-purple-600 dark:text-purple-300">Certifications</h3>
+            <h3 className="text-2xl font-bold mb-4 text-purple-700 dark:text-purple-300">Certifications</h3>
             <ul className="space-y-4 text-gray-600 dark:text-gray-300">
               {certifications.map((cert, index) => (
                 <li key={index}>
@@ -357,7 +357,7 @@ export default function Home() {
         transition={{ duration: 0.8 }}
         className="mb-12"
       >
-        <h2 className="text-4xl font-semibold text-purple-700 dark:text-purple-300 mb-6 text-center">{projectsTitle}</h2>
+        <h2 className="text-4xl font-semibold text-purple-800 dark:text-purple-300 mb-6 text-center">{projectsTitle}</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {projects.map((project, index) => (
             <motion.div
@@ -374,8 +374,8 @@ export default function Home() {
                 />
               </div>
               <h3 className="text-2xl font-bold mb-2 text-gray-800 dark:text-gray-50 dark:[text-shadow:_0_1px_2px_rgba(0,0,0,0.3)] font-semibold">{project.name}</h3>
-              <p className="mb-2 text-gray-600 dark:text-gray-300">Tech: {project.tech}</p>
-              <p className="text-gray-600 dark:text-gray-300">{project.desc}</p>
+              <p className="mb-2 text-gray-700 dark:text-gray-300">Tech: {project.tech}</p>
+              <p className="text-gray-700 dark:text-gray-300">{project.desc}</p>
               <div className="mt-auto space-x-4">
                 <a href={project.link} className="text-blue-500 dark:text-blue-400 hover:underline">GitHub</a>
                 {project.demo && <a href={project.demo} className="text-blue-500 dark:text-blue-400 hover:underline">Demo</a>}
