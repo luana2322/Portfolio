@@ -16,6 +16,14 @@ export default function Home() {
     const savedLang = localStorage.getItem("lang");
     if (savedTheme === "dark") setDarkMode(true);
     if (savedLang) setLang(savedLang);
+
+    // Load Credly embed script once
+    if (!document.querySelector('script[src="//cdn.credly.com/assets/utilities/embed.js"]')) {
+      const script = document.createElement("script");
+      script.src = "//cdn.credly.com/assets/utilities/embed.js";
+      script.async = true;
+      document.body.appendChild(script);
+    }
   }, []);
 
   const toggleDarkMode = () => {
@@ -336,7 +344,7 @@ export default function Home() {
           </div>
           <div className={`${darkMode ? "bg-gray-800 border-gray-700" : "bg-white border-gray-200"} p-6 rounded-lg shadow-lg border`}>
             <h3 className="text-2xl font-bold mb-4 text-purple-700 dark:text-purple-300">Certifications</h3>
-            <ul className="space-y-4 text-gray-800 dark:text-gray-300">
+            <ul className="space-y-4 text-gray-800 dark:text-gray-300 mb-6">
               {certifications.map((cert, index) => (
                 <li key={index}>
                   <strong className="text-gray-800 dark:text-gray-50 dark:[text-shadow:_0_1px_2px_rgba(0,0,0,0.3)] font-semibold">{cert.title}</strong><br />
@@ -345,6 +353,23 @@ export default function Home() {
                 </li>
               ))}
             </ul>
+            {/* Credly Badges */}
+            <div className="flex flex-wrap gap-4 justify-start">
+              {[
+                "4074c3bb-9c01-4623-9578-9c0542f8652d",
+                "0a8cd209-0f3f-4bdf-a598-a563dc36b99f",
+                "657d5b06-0573-4c50-ae7a-295abc486ea6",
+                "11f987ba-0243-4f38-99bc-cd938d3da17f",
+              ].map((badgeId) => (
+                <div
+                  key={badgeId}
+                  data-iframe-width="150"
+                  data-iframe-height="270"
+                  data-share-badge-id={badgeId}
+                  data-share-badge-host="https://www.credly.com"
+                />
+              ))}
+            </div>
           </div>
         </div>
       </motion.section>
