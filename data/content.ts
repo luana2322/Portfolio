@@ -86,6 +86,16 @@ export const content: Record<string, LangContent> = {
         period: "2025年7月 - 2025年9月",
         desc: "バックエンドシステムの開発と保守、FastAPIおよびRESTful APIを使用したプロジェクトに貢献。",
       },
+      {
+        title: "CodeGym Danang (開発インターン)",
+        period: "2025年10月 - 現在",
+        desc: "Webアプリケーション機能の開発・保守、RESTful APIの実装、MySQLデータベースの最適化、Gitを使用したチーム協力を担当。コードレビュー、テスト、デバッグ、ソフトウェア保守にも参加。",
+      },
+      {
+        title: "GTM MEDIA (ソフトウェア開発者 - AI動画制作ツール)",
+        period: "2025年10月 - 現在",
+        desc: "アカウント、ワークフロー、データ管理モジュールを開発し、AI動画制作のためのデスクトップソフトウェアを構築。AI APIの統合、コンテンツ生成ワークフローの自動化、アプリケーションパフォーマンスの最適化を実施し、Gitを使用したチーム協力でソフトウェアの品質と安定性を確保。",
+      },
     ],
     certifications: [
       {
@@ -195,6 +205,16 @@ export const content: Record<string, LangContent> = {
         title: "Mynavi Tectus Vietnam Co., Ltd. (Backend Developer Intern)",
         period: "Jul 2025 - Sep 2025",
         desc: "Contributed to backend system development and maintenance, working on projects using Spring Boot and RESTful APIs.",
+      },
+      {
+        title: "CodeGym Danang (Developer Intern)",
+        period: "Oct 2025 - Present",
+        desc: "Developed and maintained web application features, implemented RESTful APIs, optimized MySQL databases, and collaborated with the team using Git. Participated in code reviews, testing, debugging, and software maintenance.",
+      },
+      {
+        title: "GTM MEDIA (Software Developer - AI Video Production Tool)",
+        period: "Oct 2025 - Present",
+        desc: "Developed desktop software for AI-powered video production, building account, workflow, and data management modules. Integrated AI APIs, automated content generation workflows, optimized application performance, and collaborated with the team using Git to ensure software quality and stability.",
       },
     ],
     certifications: [
