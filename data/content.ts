@@ -58,7 +58,7 @@ export interface LangContent {
 export const content: Record<string, LangContent> = {
   ja: {
     title: "タイ・グエン・バオ・ルアン",
-    role: "ソフトウェアエンジニアインターン",
+    role: "ソフトウェアエンジニア",
     about: "出身地：ベトナム、ダナン市、ホアハイ地区、グー・ハンソン区。現在の住所：ダナン市、グー・ハンソン区、ホアハイ。言語：日本語、英語。情報技術を専攻する学生で、Java、Spring Boot、React Nativeなどの技術を使った実践的なプロジェクトに取り組んでいます。",
     ageGender: "男性, 22歳 (2004年1月1日生)",
     skillsTitle: "スキル",
