@@ -168,7 +168,7 @@ export const content: Record<string, LangContent> = {
   },
   en: {
     title: "Thai Nguyen Bao Luan",
-    role: "Software Engineer Intern",
+    role: "Software Engineer",
     about: "Born in Hoa Hai Ward, Ngu Hanh Son District, Da Nang, Vietnam. Current address: Hoa Hai, Ngu Hanh Son, Da Nang. Languages: Japanese, English. A dedicated IT student passionate about software development, with hands-on experience in Java, Spring Boot, React Native, and modern technologies.",
     ageGender: "Male, 22 (Born: Jan 1, 2004)",
     skillsTitle: "Skills",
