@@ -1,120 +1,198 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
-import type { Project } from "@/data/content";
+import {
+  ExternalLink,
+  Sparkles,
+  FolderGit2,
+} from "lucide-react";
+import { FaGithub } from "react-icons/fa";
+import type { LangContent } from "@/data/content";
 
 interface ProjectsProps {
-  projectsTitle: string;
-  projects: Project[];
-  darkMode: boolean;
+  content: LangContent;
 }
 
-const containerVariants = {
-  hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.1 },
-  },
-};
+export default function Projects({ content }: ProjectsProps) {
+  const [activeCategory, setActiveCategory] = useState<string>("all");
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0 },
-};
+  const categories = [
+    { key: "all", label: content.projectsFilterAll },
+    { key: "fullstack", label: "Fullstack" },
+    { key: "mobile", label: "Mobile Apps" },
+    { key: "backend", label: "Backend" },
+    { key: "ai", label: "AI & ML" },
+  ];
 
-export default function Projects({ projectsTitle, projects, darkMode }: ProjectsProps) {
+  const filteredProjects =
+    activeCategory === "all"
+      ? content.projects
+      : content.projects.filter((p) => p.category === activeCategory);
+
   return (
-    <motion.section
-      id="projects"
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: "-100px" }}
-      className="py-20 px-4"
-    >
-      <div className="max-w-6xl mx-auto">
-        <motion.h2
-          variants={cardVariants}
-          className="text-3xl sm:text-4xl font-bold text-center mb-12"
-        >
-          <span className="bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent">
-            {projectsTitle}
-          </span>
-        </motion.h2>
+    <section id="projects" className="scroll-mt-28 py-20 sm:py-28 relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Heading */}
+        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full glass-panel text-xs font-semibold text-sky-500 dark:text-sky-400 mb-3"
+          >
+            <FolderGit2 className="w-3.5 h-3.5" />
+            <span>Showcase & Portfolio</span>
+          </motion.div>
+          <motion.h2
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight"
+          >
+            <span className="gradient-text">{content.projectsTitle}</span>
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="mt-3 text-sm sm:text-base text-slate-600 dark:text-slate-400"
+          >
+            {content.projectsSubtitle}
+          </motion.p>
+        </div>
 
-        <motion.div
-          variants={containerVariants}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-        >
-          {projects.map((project, index) => (
-            <motion.div
-              key={index}
-              variants={cardVariants}
-              whileHover={{ y: -8 }}
-              className={`${darkMode ? "bg-gray-800/50 border-gray-700/50 hover:border-purple-500/50" : "bg-white/50 border-gray-200/50 hover:border-purple-400/50"} rounded-2xl shadow-lg backdrop-blur-sm border overflow-hidden group transition-all duration-300 flex flex-col`}
+        {/* Filter Category Pills */}
+        <div className="flex justify-center flex-wrap gap-2 mb-12">
+          {categories.map((cat) => (
+            <button
+              key={cat.key}
+              type="button"
+              onClick={() => setActiveCategory(cat.key)}
+              className={`px-4 sm:px-5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer ${
+                activeCategory === cat.key
+                  ? "bg-gradient-to-r from-sky-500 to-cyan-500 text-white shadow-md shadow-sky-500/25 scale-105"
+                  : "glass-panel text-slate-600 dark:text-slate-300 hover:text-sky-500 dark:hover:text-sky-400 hover:border-sky-500/30"
+              }`}
             >
-              <div className="relative h-48 overflow-hidden bg-gray-100 dark:bg-gray-700">
-                <Image
-                  src={project.image}
-                  alt={project.name}
-                  fill
-                  className="object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              </div>
-
-              <div className="p-5 flex flex-col flex-1">
-                <h3 className="text-lg font-bold text-gray-800 dark:text-gray-100 mb-2 line-clamp-1">
-                  {project.name}
-                </h3>
-
-                <div className="flex flex-wrap gap-1.5 mb-3">
-                  {project.tech.split(", ").slice(0, 4).map((t, i) => (
-                    <span
-                      key={i}
-                      className="text-xs px-2 py-0.5 rounded-full bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 font-medium"
-                    >
-                      {t}
-                    </span>
-                  ))}
-                  {project.tech.split(", ").length > 4 && (
-                    <span className="text-xs px-2 py-0.5 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400">
-                      +{project.tech.split(", ").length - 4}
-                    </span>
-                  )}
-                </div>
-
-                <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 flex-1 line-clamp-2">
-                  {project.desc}
-                </p>
-
-                <div className="flex items-center gap-3 pt-3 border-t border-gray-100 dark:border-gray-700">
-                  <a
-                    href={project.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-1.5 text-sm font-medium text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 transition-colors"
-                  >
-                    <FaGithub />
-                    GitHub
-                  </a>
-                  {project.demo && (
-                    <a
-                      href={project.demo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-1.5 text-sm font-medium text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors"
-                    >
-                      <FaExternalLinkAlt />
-                      Demo
-                    </a>
-                  )}
-                </div>
-              </div>
-            </motion.div>
+              {cat.label}
+            </button>
           ))}
+        </div>
+
+        {/* Projects Grid */}
+        <motion.div
+          layout
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
+        >
+          <AnimatePresence>
+            {filteredProjects.map((project, index) => (
+              <motion.div
+                key={project.id || index}
+                layout
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.3, delay: index * 0.05 }}
+                className="group flex flex-col rounded-3xl glass-panel overflow-hidden shadow-lg shadow-black/5 hover:border-sky-500/40 hover:shadow-2xl hover:shadow-sky-500/10 transition-all duration-300"
+              >
+                {/* Image Container */}
+                <div className="relative h-48 sm:h-52 w-full overflow-hidden bg-slate-900">
+                  <Image
+                    src={project.image}
+                    alt={project.name}
+                    fill
+                    className="object-cover object-center transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+
+                  {/* Category Pill on top-left */}
+                  <div className="absolute top-3 left-3 flex gap-2">
+                    <span className="px-2.5 py-1 rounded-lg text-[11px] font-bold uppercase tracking-wider bg-black/60 backdrop-blur-md text-sky-400 border border-white/10">
+                      {project.category}
+                    </span>
+                    {project.featured && (
+                      <span className="px-2 py-1 rounded-lg text-[11px] font-bold bg-amber-500/90 text-white flex items-center gap-1 shadow-sm">
+                        <Sparkles className="w-3 h-3" />
+                        Featured
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                {/* Card Content Body */}
+                <div className="p-6 flex flex-col flex-1 justify-between">
+                  <div>
+                    <h3 className="text-lg sm:text-xl font-bold text-slate-800 dark:text-white mb-2 group-hover:text-sky-500 dark:group-hover:text-sky-400 transition-colors">
+                      {project.name}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-4 line-clamp-3">
+                      {project.desc}
+                    </p>
+
+                    {/* Highlights bullets if available */}
+                    {project.highlights && (
+                      <ul className="space-y-1.5 mb-4">
+                        {project.highlights.slice(0, 2).map((item, hIdx) => (
+                          <li
+                            key={hIdx}
+                            className="flex items-start gap-2 text-xs text-slate-500 dark:text-slate-400"
+                          >
+                            <span className="text-sky-500 font-bold">▸</span>
+                            <span className="line-clamp-1">{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+
+                  <div>
+                    {/* Tech Stack Pills */}
+                    <div className="flex flex-wrap gap-1.5 mb-5 pt-3 border-t border-slate-200/60 dark:border-white/10">
+                      {project.tech.map((t, tIdx) => (
+                        <span
+                          key={tIdx}
+                          className="px-2.5 py-0.5 rounded-md text-[11px] font-medium bg-slate-100 dark:bg-slate-800/80 text-slate-700 dark:text-slate-300"
+                        >
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+
+                    {/* Card Actions */}
+                    <div className="flex items-center gap-3">
+                      <a
+                        href={project.link}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="flex-1 inline-flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-xs font-semibold text-slate-800 dark:text-slate-200 transition-colors"
+                      >
+                        <FaGithub className="w-3.5 h-3.5" />
+                        <span>Source Code</span>
+                      </a>
+
+                      {project.demo && (
+                        <a
+                          href={project.demo}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="inline-flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl bg-sky-500/10 hover:bg-sky-500 text-sky-600 dark:text-sky-400 hover:text-white text-xs font-semibold transition-colors"
+                        >
+                          <span>Live Demo</span>
+                          <ExternalLink className="w-3.5 h-3.5" />
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </AnimatePresence>
         </motion.div>
       </div>
-    </motion.section>
+    </section>
   );
 }

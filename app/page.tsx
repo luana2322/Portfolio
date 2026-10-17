@@ -3,25 +3,39 @@
 import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
-import Skills from "@/components/Skills";
-import Education from "@/components/Education";
+import About from "@/components/About";
 import ExperienceCertifications from "@/components/ExperienceCertifications";
 import Projects from "@/components/Projects";
+import Skills from "@/components/Skills";
+import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
-import { content, credlyBadgeIds } from "@/data/content";
+import { content } from "@/data/content";
 
 export default function Home() {
-  const [darkMode, setDarkMode] = useState(false);
-  const [lang, setLang] = useState("ja");
-  const [isClient, setIsClient] = useState(false);
+  const [darkMode, setDarkMode] = useState(true);
+  const [lang, setLang] = useState("vi");
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setIsClient(true);
-    const savedTheme = localStorage.getItem("theme");
-    const savedLang = localStorage.getItem("lang");
-    if (savedTheme === "dark") setDarkMode(true);
-    if (savedLang) setLang(savedLang);
+    setMounted(true);
 
+    // Read stored theme preference (default to dark for modern high-tech look)
+    const savedTheme = localStorage.getItem("theme");
+    const isDark = savedTheme ? savedTheme === "dark" : true;
+    setDarkMode(isDark);
+    if (isDark) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+
+    // Read stored language preference
+    const savedLang = localStorage.getItem("lang");
+    if (savedLang && content[savedLang]) {
+      setLang(savedLang);
+    }
+
+    // Load Credly badge script if not present
     if (!document.querySelector('script[src="//cdn.credly.com/assets/utilities/embed.js"]')) {
       const script = document.createElement("script");
       script.src = "//cdn.credly.com/assets/utilities/embed.js";
@@ -31,85 +45,70 @@ export default function Home() {
   }, []);
 
   const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-    localStorage.setItem("theme", darkMode ? "light" : "dark");
+    const nextDark = !darkMode;
+    setDarkMode(nextDark);
+    localStorage.setItem("theme", nextDark ? "dark" : "light");
+    if (nextDark) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
   };
 
-  const changeLanguage = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const newLang = e.target.value;
+  const handleSetLang = (newLang: string) => {
     setLang(newLang);
     localStorage.setItem("lang", newLang);
   };
 
-  if (!isClient) return null;
+  if (!mounted) {
+    return (
+      <div className="fixed inset-0 flex items-center justify-center bg-[#0b1329] text-sky-400">
+        <div className="flex flex-col items-center gap-3">
+          <div className="w-10 h-10 border-3 border-sky-500 border-t-transparent rounded-full animate-spin" />
+          <span className="text-xs uppercase font-mono tracking-widest text-slate-400">Loading Portfolio...</span>
+        </div>
+      </div>
+    );
+  }
 
-  const c = content[lang as keyof typeof content];
+  const currentContent = content[lang] || content.vi;
 
   return (
-    <div className={`${darkMode ? "bg-gray-900 text-gray-100" : "bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50 text-gray-900"} min-h-screen transition-colors duration-300`}>
+    <div className="min-h-screen relative bg-background text-foreground transition-colors duration-300">
+      {/* Floating Navbar */}
       <Navbar
-        title={c.title}
+        title={currentContent.title}
         lang={lang}
         darkMode={darkMode}
         toggleDarkMode={toggleDarkMode}
-        changeLanguage={changeLanguage}
-        nav={c.nav}
+        setLang={handleSetLang}
+        nav={currentContent.nav}
+        ctaText={currentContent.ctaContact}
       />
 
-      <Hero
-        title={c.title}
-        role={c.role}
-        about={c.about}
-        ageGender={c.ageGender}
-        contact={c.contact}
-      />
+      {/* Main Content Sections */}
+      <main className="relative z-10">
+        {/* Hero Section with Interactive Terminal */}
+        <Hero content={currentContent} />
 
-      <Skills
-        skillsTitle={c.skillsTitle}
-        skills={c.skills}
-        darkMode={darkMode}
-      />
+        {/* About & Quick Stats Section */}
+        <About content={currentContent} />
 
-      <Education
-        educationTitle={c.educationTitle}
-        education={c.education}
-        darkMode={darkMode}
-      />
+        {/* Career & Experience Timeline + Certifications + Education */}
+        <ExperienceCertifications content={currentContent} />
 
-      <ExperienceCertifications
-        experienceTitle={c.experienceTitle}
-        experience={c.experience}
-        certifications={c.certifications}
-        darkMode={darkMode}
-      />
+        {/* Featured Projects Showcase with Interactive Filters */}
+        <Projects content={currentContent} />
 
-      {/* Credly Badges Section */}
-      <section className="py-12 px-4">
-        <div className="max-w-4xl mx-auto">
-          <p className={`text-center text-sm mb-6 ${darkMode ? "text-gray-400" : "text-gray-500"}`}>
-            {lang === "ja" ? "認定バッジ" : "Verified Badges"}
-          </p>
-          <div className="flex flex-wrap gap-4 justify-center">
-            {credlyBadgeIds.map((badgeId) => (
-              <div
-                key={badgeId}
-                data-iframe-width="150"
-                data-iframe-height="270"
-                data-share-badge-id={badgeId}
-                data-share-badge-host="https://www.credly.com"
-              />
-            ))}
-          </div>
-        </div>
-      </section>
+        {/* Tech Stack & Skills Matrix */}
+        <Skills content={currentContent} />
 
-      <Projects
-        projectsTitle={c.projectsTitle}
-        projects={c.projects}
-        darkMode={darkMode}
-      />
+        {/* Interactive Contact & Message Form */}
+        <Contact content={currentContent} />
+      </main>
 
-      <Footer footer={c.footer} darkMode={darkMode} />
+      {/* Modern Footer */}
+      <Footer content={currentContent} />
     </div>
   );
 }

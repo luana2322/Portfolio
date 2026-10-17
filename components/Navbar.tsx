@@ -1,112 +1,239 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { HiMenu, HiX } from "react-icons/hi";
+import { 
+  Sun, 
+  Moon, 
+  Menu, 
+  X, 
+  Send,
+  Code2,
+  ChevronDown
+} from "lucide-react";
 
 interface NavbarProps {
   title: string;
   lang: string;
   darkMode: boolean;
   toggleDarkMode: () => void;
-  changeLanguage: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-  nav: { about: string; skills: string; education: string; experience: string; projects: string };
+  setLang: (lang: string) => void;
+  nav: {
+    about: string;
+    skills: string;
+    experience: string;
+    projects: string;
+    contact: string;
+  };
+  ctaText: string;
 }
 
-const navItems = ["about", "skills", "education", "experience", "projects"] as const;
+const languages = [
+  { code: "vi", label: "Tiếng Việt", flag: "🇻🇳", short: "VI" },
+  { code: "en", label: "English", flag: "🇺🇸", short: "EN" },
+  { code: "ja", label: "日本語", flag: "🇯🇵", short: "JA" },
+];
 
-export default function Navbar({ title, lang, darkMode, toggleDarkMode, changeLanguage, nav }: NavbarProps) {
-  const [menuOpen, setMenuOpen] = useState(false);
+export default function Navbar({
+  title,
+  lang,
+  darkMode,
+  toggleDarkMode,
+  setLang,
+  nav,
+  ctaText,
+}: NavbarProps) {
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [langMenuOpen, setLangMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const navLinks = [
+    { href: "#about", label: nav.about },
+    { href: "#experience", label: nav.experience },
+    { href: "#projects", label: nav.projects },
+    { href: "#skills", label: nav.skills },
+    { href: "#contact", label: nav.contact },
+  ];
+
+  const currentLangObj = languages.find((l) => l.code === lang) || languages[0];
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 ${darkMode ? "bg-gray-900/80 text-gray-100" : "bg-white/80 text-gray-800"} backdrop-blur-lg border-b ${darkMode ? "border-gray-800" : "border-gray-200/50"} transition-colors duration-300`}>
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="flex justify-between items-center h-16">
-          <motion.h1
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent"
+    <header className="fixed top-3 left-0 right-0 z-50 flex justify-center px-4 sm:px-6">
+      <motion.div
+        initial={{ y: -20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        className={`w-full max-w-6xl rounded-2xl transition-all duration-300 ${
+          scrolled
+            ? "glass-nav shadow-xl shadow-black/10 dark:shadow-black/30 py-2 sm:py-2.5 px-4 sm:px-6"
+            : "bg-white/60 dark:bg-slate-900/60 backdrop-blur-md border border-slate-200/50 dark:border-white/10 py-3 px-4 sm:px-6"
+        }`}
+      >
+        <div className="flex items-center justify-between">
+          {/* Logo */}
+          <a
+            href="#home"
+            className="group flex items-center gap-2.5 focus:outline-none"
+            aria-label="Home"
           >
-            {title}
-          </motion.h1>
-
-          {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-6">
-            {navItems.map((item) => (
-              <a
-                key={item}
-                href={`#${item}`}
-                className="relative text-sm font-medium hover:text-purple-600 dark:hover:text-purple-400 transition-colors after:absolute after:bottom-[-4px] after:left-0 after:h-[2px] after:w-0 after:bg-purple-600 after:transition-all hover:after:w-full"
-              >
-                {nav[item]}
-              </a>
-            ))}
-            <select
-              value={lang}
-              onChange={changeLanguage}
-              className={`${darkMode ? "bg-gray-800 text-gray-100 border-gray-700" : "bg-gray-100 text-gray-800 border-gray-300"} text-sm px-3 py-1.5 rounded-lg border focus:outline-none focus:ring-2 focus:ring-purple-500 cursor-pointer`}
-            >
-              <option value="ja">日本語</option>
-              <option value="en">English</option>
-            </select>
-            <button
-              onClick={toggleDarkMode}
-              className={`${darkMode ? "bg-gray-800 text-yellow-400 hover:bg-gray-700" : "bg-gray-200 text-gray-700 hover:bg-gray-300"} px-4 py-2 rounded-lg text-sm font-medium transition-all`}
-            >
-              {darkMode ? "☀️" : "🌙"}
-            </button>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-          >
-            {menuOpen ? <HiX size={24} /> : <HiMenu size={24} />}
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className={`md:hidden border-t ${darkMode ? "border-gray-800 bg-gray-900" : "border-gray-200/50 bg-white"} overflow-hidden`}
-          >
-            <div className="px-4 py-4 space-y-3">
-              {navItems.map((item) => (
-                <a
-                  key={item}
-                  href={`#${item}`}
-                  onClick={() => setMenuOpen(false)}
-                  className="block text-sm font-medium hover:text-purple-600 dark:hover:text-purple-400 transition-colors py-2"
-                >
-                  {nav[item]}
-                </a>
-              ))}
-              <div className="flex items-center space-x-3 pt-2 border-t dark:border-gray-800 border-gray-200">
-                <select
-                  value={lang}
-                  onChange={changeLanguage}
-                  className={`${darkMode ? "bg-gray-800 text-gray-100 border-gray-700" : "bg-gray-100 text-gray-800 border-gray-300"} text-sm px-3 py-1.5 rounded-lg border flex-1`}
-                >
-                  <option value="ja">日本語</option>
-                  <option value="en">English</option>
-                </select>
-                <button
-                  onClick={toggleDarkMode}
-                  className={`${darkMode ? "bg-gray-800 text-yellow-400" : "bg-gray-200 text-gray-700"} px-4 py-2 rounded-lg text-sm flex-1`}
-                >
-                  {darkMode ? "☀️ Light" : "🌙 Dark"}
-                </button>
+            <div className="relative flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-tr from-sky-500 via-cyan-400 to-orange-400 p-[1.5px] transition-transform duration-300 group-hover:scale-105 shadow-md shadow-sky-500/20">
+              <div className="flex h-full w-full items-center justify-center rounded-[10px] bg-white dark:bg-slate-900 text-sky-500 dark:text-sky-400 font-bold text-sm tracking-wider">
+                <Code2 className="w-5 h-5 transition-transform group-hover:rotate-12" />
               </div>
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </nav>
+            <div className="flex flex-col">
+              <span className="font-bold text-sm sm:text-base tracking-tight text-slate-800 dark:text-white group-hover:text-sky-500 dark:group-hover:text-sky-400 transition-colors">
+                {title}
+              </span>
+              <span className="text-[10px] uppercase font-semibold tracking-wider text-slate-500 dark:text-slate-400 hidden xs:inline">
+                Software Engineer
+              </span>
+            </div>
+          </a>
+
+          {/* Desktop Nav Links */}
+          <nav className="hidden md:flex items-center gap-1 lg:gap-2">
+            {navLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="px-3.5 py-1.5 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-sky-500 dark:hover:text-sky-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 rounded-xl transition-all duration-200"
+              >
+                {link.label}
+              </a>
+            ))}
+          </nav>
+
+          {/* Right Action Icons & CTA */}
+          <div className="flex items-center gap-2 sm:gap-3">
+            {/* Language Switcher Dropdown */}
+            <div className="relative">
+              <button
+                type="button"
+                onClick={() => setLangMenuOpen(!langMenuOpen)}
+                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-slate-800/80 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors cursor-pointer border border-slate-200 dark:border-white/5"
+                aria-label="Change Language"
+              >
+                <span className="text-sm">{currentLangObj.flag}</span>
+                <span className="font-semibold">{currentLangObj.short}</span>
+                <ChevronDown className="w-3.5 h-3.5 text-slate-400 transition-transform duration-200" />
+              </button>
+
+              <AnimatePresence>
+                {langMenuOpen && (
+                  <>
+                    <div
+                      className="fixed inset-0 z-40"
+                      onClick={() => setLangMenuOpen(false)}
+                    />
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.95, y: -4 }}
+                      animate={{ opacity: 1, scale: 1, y: 0 }}
+                      exit={{ opacity: 0, scale: 0.95, y: -4 }}
+                      transition={{ duration: 0.15 }}
+                      className="absolute right-0 mt-2 w-36 rounded-xl glass-panel shadow-xl shadow-black/10 py-1.5 z-50 overflow-hidden"
+                    >
+                      {languages.map((l) => (
+                        <button
+                          key={l.code}
+                          type="button"
+                          onClick={() => {
+                            setLang(l.code);
+                            setLangMenuOpen(false);
+                          }}
+                          className={`flex items-center w-full gap-2 px-3 py-2 text-xs font-medium transition-colors text-left ${
+                            lang === l.code
+                              ? "bg-sky-500/10 text-sky-500 dark:text-sky-400 font-semibold"
+                              : "text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/60"
+                          }`}
+                        >
+                          <span className="text-base">{l.flag}</span>
+                          <span>{l.label}</span>
+                        </button>
+                      ))}
+                    </motion.div>
+                  </>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* Dark / Light Mode Toggle */}
+            <button
+              type="button"
+              onClick={toggleDarkMode}
+              className="p-2 rounded-xl text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-slate-800/80 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors cursor-pointer border border-slate-200 dark:border-white/5"
+              aria-label="Toggle Dark Mode"
+            >
+              {darkMode ? (
+                <Sun className="w-4 h-4 text-amber-400 animate-spin-slow" />
+              ) : (
+                <Moon className="w-4 h-4 text-slate-600" />
+              )}
+            </button>
+
+            {/* CTA Button */}
+            <a
+              href="#contact"
+              className="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold text-white bg-gradient-to-r from-sky-500 via-cyan-500 to-sky-600 hover:from-sky-600 hover:to-cyan-600 shadow-lg shadow-sky-500/25 hover:shadow-sky-500/40 hover:-translate-y-0.5 transition-all duration-200"
+            >
+              <Send className="w-3.5 h-3.5" />
+              <span>{ctaText}</span>
+            </a>
+
+            {/* Mobile Hamburger Button */}
+            <button
+              type="button"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="md:hidden p-2 rounded-xl text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-slate-800/80 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors cursor-pointer border border-slate-200 dark:border-white/5"
+              aria-label="Toggle menu"
+            >
+              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile Dropdown Menu */}
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              className="md:hidden overflow-hidden border-t border-slate-200/60 dark:border-white/10 mt-3 pt-3"
+            >
+              <div className="flex flex-col space-y-1 pb-2">
+                {navLinks.map((link) => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="px-3 py-2 text-sm font-medium rounded-lg text-slate-700 dark:text-slate-200 hover:bg-sky-500/10 hover:text-sky-500 dark:hover:text-sky-400 transition-colors"
+                  >
+                    {link.label}
+                  </a>
+                ))}
+                <a
+                  href="#contact"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="mt-2 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-sky-500 to-cyan-500 shadow-md shadow-sky-500/20"
+                >
+                  <Send className="w-4 h-4" />
+                  <span>{ctaText}</span>
+                </a>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.div>
+    </header>
   );
 }

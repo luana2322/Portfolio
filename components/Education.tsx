@@ -41,7 +41,7 @@ export default function Education({ educationTitle, education, darkMode }: Educa
             </div>
             <div>
               <p className="text-lg sm:text-xl font-semibold text-gray-800 dark:text-gray-100 mb-2">
-                Da Nang University of Technology
+                Vietnam - Korea University of Information and Communication Technology (VKU)
               </p>
               <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
                 {education}
