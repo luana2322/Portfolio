@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Briefcase,
@@ -10,6 +10,7 @@ import {
   MapPin,
   CheckCircle2,
   Sparkles,
+  ExternalLink,
 } from "lucide-react";
 import type { LangContent } from "@/data/content";
 import { credlyBadgeIds } from "@/data/content";
@@ -23,8 +24,26 @@ export default function ExperienceCertifications({ content }: ExperienceProps) {
     "experience"
   );
 
+  useEffect(() => {
+    const handleHash = () => {
+      const hash = window.location.hash.toLowerCase();
+      if (hash === "#certifications" || hash === "#certificates") {
+        setActiveTab("certifications");
+      } else if (hash === "#education") {
+        setActiveTab("education");
+      } else if (hash === "#experience") {
+        setActiveTab("experience");
+      }
+    };
+    handleHash();
+    window.addEventListener("hashchange", handleHash);
+    return () => window.removeEventListener("hashchange", handleHash);
+  }, []);
+
   return (
     <section id="experience" className="scroll-mt-28 py-20 sm:py-28 relative overflow-hidden bg-slate-500/[0.02]">
+      <div id="certifications" className="scroll-mt-28" />
+      <div id="education" className="scroll-mt-28" />
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Heading */}
         <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
@@ -70,7 +89,7 @@ export default function ExperienceCertifications({ content }: ExperienceProps) {
               }`}
             >
               <Briefcase className="w-4 h-4" />
-              <span>Kinh Nghiệm</span>
+              <span>{content.tabExperience || "Kinh Nghiệm"}</span>
             </button>
 
             <button
@@ -83,7 +102,10 @@ export default function ExperienceCertifications({ content }: ExperienceProps) {
               }`}
             >
               <Award className="w-4 h-4" />
-              <span>Chứng Chỉ & Giải Thưởng</span>
+              <span>{content.tabCertifications || "Chứng Chỉ & Giải Thưởng"}</span>
+              <span className="ml-0.5 px-2 py-0.5 rounded-full text-[11px] font-extrabold bg-amber-500/20 text-amber-500 dark:text-amber-400">
+                {content.certifications.length}
+              </span>
             </button>
 
             <button
@@ -96,7 +118,7 @@ export default function ExperienceCertifications({ content }: ExperienceProps) {
               }`}
             >
               <GraduationCap className="w-4 h-4" />
-              <span>Học Vấn</span>
+              <span>{content.tabEducation || "Học Vấn"}</span>
             </button>
           </div>
         </div>
@@ -180,6 +202,30 @@ export default function ExperienceCertifications({ content }: ExperienceProps) {
                   </div>
                 </div>
               ))}
+
+              {/* Highlight callout to Certifications */}
+              <div className="p-5 sm:p-6 rounded-3xl glass-panel border border-amber-500/30 bg-gradient-to-r from-amber-500/10 via-sky-500/5 to-cyan-500/5 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-lg shadow-black/5">
+                <div className="flex items-center gap-3.5 text-center sm:text-left">
+                  <div className="p-3 rounded-2xl bg-amber-500/15 text-amber-500 shrink-0">
+                    <Award className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <p className="text-sm sm:text-base font-bold text-slate-800 dark:text-white">
+                      {content.certBannerText || "Sở hữu 7 chứng chỉ công nghệ & giải thưởng uy tín từ Cisco, HackerRank, Withus và Tetote Hackathon"}
+                    </p>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+                      {content.verifiedBadgesTitle || "Credly Verified Badges & Technical Honors"}
+                    </p>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setActiveTab("certifications")}
+                  className="px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-md shadow-amber-500/25 hover:scale-105 transition-all shrink-0 cursor-pointer"
+                >
+                  {content.certBannerAction || "Xem toàn bộ chứng chỉ"} →
+                </button>
+              </div>
             </motion.div>
           )}
 
@@ -221,12 +267,26 @@ export default function ExperienceCertifications({ content }: ExperienceProps) {
                       {cert.desc}
                     </p>
 
-                    {cert.badge && (
-                      <span className="inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1 rounded-lg bg-emerald-500/10 text-emerald-500">
-                        <CheckCircle2 className="w-3.5 h-3.5" />
-                        <span>{cert.badge}</span>
-                      </span>
-                    )}
+                    <div className="flex items-center justify-between gap-2 pt-3 border-t border-slate-200/60 dark:border-white/10 mt-auto">
+                      {cert.badge ? (
+                        <span className="inline-flex items-center gap-1.5 text-xs font-bold px-2.5 py-1 rounded-lg bg-emerald-500/10 text-emerald-500">
+                          <CheckCircle2 className="w-3.5 h-3.5" />
+                          <span>{cert.badge}</span>
+                        </span>
+                      ) : <span />}
+
+                      {cert.link && (
+                        <a
+                          href={cert.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 text-xs font-bold text-sky-500 dark:text-sky-400 hover:text-sky-600 dark:hover:text-sky-300 hover:underline transition-all"
+                        >
+                          <span>{content.certViewCredential || "Xem xác thực"}</span>
+                          <ExternalLink className="w-3.5 h-3.5" />
+                        </a>
+                      )}
+                    </div>
                   </div>
                 ))}
               </div>
@@ -239,20 +299,43 @@ export default function ExperienceCertifications({ content }: ExperienceProps) {
                     Official Digital Credentials
                   </div>
                   <h4 className="text-xl font-bold text-slate-800 dark:text-white">
-                    Credly Verified Badges
+                    {content.verifiedBadgesTitle || "Credly Verified Badges"}
                   </h4>
+                  {content.verifiedBadgesSubtitle && (
+                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 max-w-lg mx-auto">
+                      {content.verifiedBadgesSubtitle}
+                    </p>
+                  )}
                 </div>
 
-                <div className="flex flex-wrap gap-4 justify-center items-center">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 justify-items-center">
                   {credlyBadgeIds.map((badgeId) => (
                     <div
                       key={badgeId}
-                      data-iframe-width="150"
-                      data-iframe-height="270"
-                      data-share-badge-id={badgeId}
-                      data-share-badge-host="https://www.credly.com"
-                      className="rounded-xl overflow-hidden shadow-md shadow-black/5"
-                    />
+                      className="flex flex-col items-center p-3 rounded-2xl glass-panel shadow-lg shadow-black/5 border border-slate-200/80 dark:border-white/10 hover:border-sky-500/40 transition-all duration-300 hover:-translate-y-1 group w-full max-w-[180px]"
+                    >
+                      <div className="w-[150px] h-[270px] overflow-hidden rounded-xl bg-white dark:bg-slate-900/90 flex items-center justify-center shadow-inner">
+                        <iframe
+                          name="acclaim-badge"
+                          allowTransparency={true}
+                          frameBorder="0"
+                          id={`embedded-badge-${badgeId}`}
+                          scrolling="no"
+                          src={`https://www.credly.com/embedded_badge/${badgeId}`}
+                          className="w-[150px] h-[270px] border-0"
+                          title="Credly Verified Digital Credential"
+                        />
+                      </div>
+                      <a
+                        href={`https://www.credly.com/badges/${badgeId}/public_url`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-3 inline-flex items-center gap-1 text-[11px] font-bold text-sky-500 dark:text-sky-400 hover:underline"
+                      >
+                        <span>Verify Credly</span>
+                        <ExternalLink className="w-3 h-3" />
+                      </a>
+                    </div>
                   ))}
                 </div>
               </div>

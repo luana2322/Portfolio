@@ -17,6 +17,8 @@ export interface Certification {
   issuer?: string;
   desc: string;
   badge?: string;
+  link?: string;
+  credlyId?: string;
 }
 
 export interface Experience {
@@ -72,6 +74,14 @@ export interface LangContent {
     location: string;
     details: string;
   };
+  tabExperience?: string;
+  tabCertifications?: string;
+  tabEducation?: string;
+  certViewCredential?: string;
+  verifiedBadgesTitle?: string;
+  verifiedBadgesSubtitle?: string;
+  certBannerText?: string;
+  certBannerAction?: string;
   experienceTitle: string;
   experienceSubtitle: string;
   experience: Experience[];
@@ -103,6 +113,7 @@ export interface LangContent {
     about: string;
     skills: string;
     experience: string;
+    certifications?: string;
     projects: string;
     contact: string;
   };
@@ -210,6 +221,14 @@ export const content: Record<string, LangContent> = {
       location: "Đà Nẵng, Việt Nam",
       details: "Chương trình đào tạo chuẩn kỹ sư công nghệ thông tin. Nghiên cứu sâu về Cấu trúc dữ liệu & Giải thuật, Kiến trúc phần mềm, Hệ thống phân tán, Lập trình hướng đối tượng (OOP) và Trí tuệ nhân tạo.",
     },
+    tabExperience: "Kinh Nghiệm",
+    tabCertifications: "Chứng Chỉ & Giải Thưởng",
+    tabEducation: "Học Vấn",
+    certViewCredential: "Xem chứng chỉ xác thực",
+    verifiedBadgesTitle: "Huy Hiệu Số Xác Thực Credly",
+    verifiedBadgesSubtitle: "Các chứng chỉ công nghệ và ngôn ngữ được phát hành & xác minh chính thức trên nền tảng Credly",
+    certBannerText: "Sở hữu 7 chứng chỉ công nghệ & giải thưởng uy tín từ Cisco, HackerRank, Withus và Tetote Hackathon",
+    certBannerAction: "Xem toàn bộ chứng chỉ",
     experienceTitle: "Kinh Nghiệm Làm Việc",
     experienceSubtitle: "Hành trình tích lũy kinh nghiệm qua các dự án thực tế và doanh nghiệp công nghệ",
     experience: [
@@ -276,15 +295,62 @@ export const content: Record<string, LangContent> = {
         title: "Tetote Hackathon 2024",
         period: "05/2024",
         issuer: "Tetote Organization",
-        desc: "Đạt Giải 4 chung cuộc (Rank: 4th Place) với sản phẩm sáng tạo giải quyết bài toán thực tế dưới áp lực thời gian 48 giờ.",
+        desc: "Đạt Giải 4 chung cuộc (Rank: 4th Place) với sản phẩm công nghệ sáng tạo giải quyết bài toán thực tế dưới áp lực thời gian 48 giờ.",
         badge: "Top 4 Hackathon",
+        link: "https://github.com/luana2322",
       },
       {
         title: "Software Engineer Intern Certificate",
         period: "08/2024",
         issuer: "HackerRank",
-        desc: "Chứng chỉ quốc tế đánh giá năng lực giải quyết vấn đề, thuật toán và kỹ năng lập trình chuyên nghiệp từ nền tảng HackerRank.",
+        desc: "Chứng chỉ quốc tế đánh giá năng lực giải quyết vấn đề, cấu trúc dữ liệu & giải thuật và tư duy lập trình chuyên nghiệp từ nền tảng HackerRank.",
         badge: "Verified HackerRank",
+        link: "https://www.hackerrank.com",
+      },
+      {
+        title: "CCNA: Introduction to Networks",
+        period: "2024",
+        issuer: "Cisco",
+        desc: "Chứng chỉ Cisco CCNA công nhận kiến thức toàn diện về kiến trúc mạng máy tính, giao thức IPv4/IPv6, chuyển mạch Ethernet và cấu hình router.",
+        badge: "Cisco Verified",
+        credlyId: "4074c3bb-9c01-4623-9578-9c0542f8652d",
+        link: "https://www.credly.com/badges/4074c3bb-9c01-4623-9578-9c0542f8652d/public_url",
+      },
+      {
+        title: "Junior Cybersecurity Analyst Career Path",
+        period: "2024",
+        issuer: "Cisco",
+        desc: "Chứng chỉ Cisco chuyên sâu về phân tích an ninh mạng, phát hiện nguy cơ tấn công, giám sát an toàn thông tin và quy trình ứng phó sự cố (SOC).",
+        badge: "Cisco Verified",
+        credlyId: "0ba890de-f433-4cc8-a212-9ed6223ab23b",
+        link: "https://www.credly.com/badges/0ba890de-f433-4cc8-a212-9ed6223ab23b/public_url",
+      },
+      {
+        title: "NiX・IT日本語-Zero",
+        period: "2024",
+        issuer: "株式会社ウィザス (Withus Corporation)",
+        desc: "Chứng chỉ tiếng Nhật chuyên ngành CNTT: thuật ngữ công nghệ, tác phong làm việc theo tiêu chuẩn doanh nghiệp Nhật Bản và quy trình phát triển phần mềm.",
+        badge: "Withus Verified",
+        credlyId: "0a8cd209-0f3f-4bdf-a598-a563dc36b99f",
+        link: "https://www.credly.com/badges/0a8cd209-0f3f-4bdf-a598-a563dc36b99f/public_url",
+      },
+      {
+        title: "NiX-JPN-20-専門日本語５ (IT Japanese Level 5)",
+        period: "2024",
+        issuer: "株式会社ウィザス (Withus Corporation)",
+        desc: "Chứng nhận năng lực tiếng Nhật chuyên ngành nâng cao: đọc hiểu tài liệu đặc tả yêu cầu (SRS), thiết kế chi tiết và báo cáo kỹ thuật dự án.",
+        badge: "Withus Verified",
+        credlyId: "657d5b06-0573-4c50-ae7a-295abc486ea6",
+        link: "https://www.credly.com/badges/657d5b06-0573-4c50-ae7a-295abc486ea6/public_url",
+      },
+      {
+        title: "NiX-JPN-6-基礎日本語５ (Foundational Japanese 5)",
+        period: "2024",
+        issuer: "株式会社ウィザス (Withus Corporation)",
+        desc: "Chứng nhận tiếng Nhật nền tảng nâng cao: giao tiếp công việc lưu loát, phản xạ tự nhiên và phối hợp nhóm hiệu quả trong môi trường quốc tế.",
+        badge: "Withus Verified",
+        credlyId: "11f987ba-0243-4f38-99bc-cd938d3da17f",
+        link: "https://www.credly.com/badges/11f987ba-0243-4f38-99bc-cd938d3da17f/public_url",
       },
     ],
     projectsTitle: "Dự Án Tiêu Biểu",
@@ -413,8 +479,9 @@ export const content: Record<string, LangContent> = {
     footer: "© 2026 Thái Nguyễn Bảo Luân. Tất cả các quyền được bảo lưu.",
     nav: {
       about: "Giới thiệu",
-      skills: "Kỹ năng",
       experience: "Kinh nghiệm",
+      certifications: "Chứng chỉ",
+      skills: "Kỹ năng",
       projects: "Dự án",
       contact: "Liên hệ",
     },
@@ -520,6 +587,14 @@ export const content: Record<string, LangContent> = {
       location: "Da Nang, Vietnam",
       details: "Comprehensive software engineering curriculum. In-depth focus on Data Structures & Algorithms, Software Architecture, Distributed Systems, Object-Oriented Programming (OOP), and Artificial Intelligence.",
     },
+    tabExperience: "Experience",
+    tabCertifications: "Certifications & Awards",
+    tabEducation: "Education",
+    certViewCredential: "View Verified Credential",
+    verifiedBadgesTitle: "Credly Verified Digital Credentials",
+    verifiedBadgesSubtitle: "Official tech & language credentials verified and issued through the Credly platform",
+    certBannerText: "Holder of 7 industry credentials & honors from Cisco, HackerRank, Withus Japan, and Tetote Hackathon",
+    certBannerAction: "View All Certifications",
     experienceTitle: "Work Experience",
     experienceSubtitle: "Hands-on industry journey building real-world enterprise and startup applications",
     experience: [
@@ -588,13 +663,60 @@ export const content: Record<string, LangContent> = {
         issuer: "Tetote Organization",
         desc: "Secured 4th Place (Rank: 4th) with an innovative solution built under intense 48-hour hackathon conditions.",
         badge: "Top 4 Hackathon",
+        link: "https://github.com/luana2322",
       },
       {
         title: "Software Engineer Intern Certificate",
         period: "Aug 2024",
         issuer: "HackerRank",
-        desc: "Standardized credential assessing problem solving, algorithmic competence, and professional coding practices.",
+        desc: "Standardized credential assessing problem solving, algorithmic competence, data structures, and professional coding practices.",
         badge: "Verified HackerRank",
+        link: "https://www.hackerrank.com",
+      },
+      {
+        title: "CCNA: Introduction to Networks",
+        period: "2024",
+        issuer: "Cisco",
+        desc: "Cisco verified credential covering network architectures, IPv4/IPv6 subnetting, Ethernet switching, router configuration, and foundational network security.",
+        badge: "Cisco Verified",
+        credlyId: "4074c3bb-9c01-4623-9578-9c0542f8652d",
+        link: "https://www.credly.com/badges/4074c3bb-9c01-4623-9578-9c0542f8652d/public_url",
+      },
+      {
+        title: "Junior Cybersecurity Analyst Career Path",
+        period: "2024",
+        issuer: "Cisco",
+        desc: "Cisco cybersecurity path validating competencies in network defense, vulnerability assessment, threat intelligence, and security operations center (SOC) processes.",
+        badge: "Cisco Verified",
+        credlyId: "0ba890de-f433-4cc8-a212-9ed6223ab23b",
+        link: "https://www.credly.com/badges/0ba890de-f433-4cc8-a212-9ed6223ab23b/public_url",
+      },
+      {
+        title: "NiX・IT日本語-Zero",
+        period: "2024",
+        issuer: "株式会社ウィザス (Withus Corporation)",
+        desc: "Professional IT Japanese certification focusing on engineering terminology, software development workflows, and communication standards in Japanese enterprises.",
+        badge: "Withus Verified",
+        credlyId: "0a8cd209-0f3f-4bdf-a598-a563dc36b99f",
+        link: "https://www.credly.com/badges/0a8cd209-0f3f-4bdf-a598-a563dc36b99f/public_url",
+      },
+      {
+        title: "NiX-JPN-20-専門日本語５ (IT Japanese Level 5)",
+        period: "2024",
+        issuer: "株式会社ウィザス (Withus Corporation)",
+        desc: "Advanced technical Japanese certification (Level 5): reading and creating software requirement specifications (SRS), architecture docs, and technical meetings.",
+        badge: "Withus Verified",
+        credlyId: "657d5b06-0573-4c50-ae7a-295abc486ea6",
+        link: "https://www.credly.com/badges/657d5b06-0573-4c50-ae7a-295abc486ea6/public_url",
+      },
+      {
+        title: "NiX-JPN-6-基礎日本語５ (Foundational Japanese 5)",
+        period: "2024",
+        issuer: "株式会社ウィザス (Withus Corporation)",
+        desc: "Foundational Japanese certification (Level 5): advanced conversational fluency, listening comprehension, and seamless teamwork collaboration.",
+        badge: "Withus Verified",
+        credlyId: "11f987ba-0243-4f38-99bc-cd938d3da17f",
+        link: "https://www.credly.com/badges/11f987ba-0243-4f38-99bc-cd938d3da17f/public_url",
       },
     ],
     projectsTitle: "Featured Projects",
@@ -723,8 +845,9 @@ export const content: Record<string, LangContent> = {
     footer: "© 2026 Thai Nguyen Bao Luan. All rights reserved.",
     nav: {
       about: "About",
-      skills: "Skills",
       experience: "Experience",
+      certifications: "Certifications",
+      skills: "Skills",
       projects: "Projects",
       contact: "Contact",
     },
@@ -830,6 +953,14 @@ export const content: Record<string, LangContent> = {
       location: "ベトナム、ダナン",
       details: "データ構造とアルゴリズム、分散システム、ソフトウェア設計パターン（OOP）、人工知能を重点的に学習。",
     },
+    tabExperience: "職務経歴",
+    tabCertifications: "資格 & 受賞歴",
+    tabEducation: "学歴",
+    certViewCredential: "認定証を確認する",
+    verifiedBadgesTitle: "Credly 公式デジタル認証バッジ",
+    verifiedBadgesSubtitle: "国際認証プラットフォームCredlyによって正式に発行・検証された認定バッジ",
+    certBannerText: "Cisco、HackerRank、株式会社ウィザス、Tetoteハッカソンなど7つの資格・受賞歴を保有",
+    certBannerAction: "すべての資格を見る",
     experienceTitle: "職歴 & インターン経験",
     experienceSubtitle: "実際の企業・プロダクト開発を通じた実践的な成長の軌跡",
     experience: [
@@ -898,13 +1029,60 @@ export const content: Record<string, LangContent> = {
         issuer: "Tetote Organization",
         desc: "48時間の過密スケジュール下で実用的かつ独創的なプロダクトを開発し、総合第4位に入賞。",
         badge: "Top 4 Hackathon",
+        link: "https://github.com/luana2322",
       },
       {
         title: "ソフトウェアエンジニアインターン証明書",
         period: "2024年8月",
         issuer: "HackerRank",
-        desc: "問題解決力、アルゴリズム設計、プログラミング実務能力を認証する世界基準の証明書。",
+        desc: "問題解決力、アルゴリズム設計、データ構造、プログラミング実務能力を認証する世界基準の証明書。",
         badge: "Verified HackerRank",
+        link: "https://www.hackerrank.com",
+      },
+      {
+        title: "CCNA: Introduction to Networks",
+        period: "2024年",
+        issuer: "Cisco (シスコ)",
+        desc: "シスコ認定資格。ネットワーク基盤、IPv4/IPv6アドレッシング、スイッチング、ルーター構築およびネットワーク運用スキルを証明。",
+        badge: "Cisco Verified",
+        credlyId: "4074c3bb-9c01-4623-9578-9c0542f8652d",
+        link: "https://www.credly.com/badges/4074c3bb-9c01-4623-9578-9c0542f8652d/public_url",
+      },
+      {
+        title: "Junior Cybersecurity Analyst Career Path",
+        period: "2024年",
+        issuer: "Cisco (シスコ)",
+        desc: "シスコ認定セキュリティアナリスト資格。サイバー攻撃検知、脆弱性対策、セキュリティ運用（SOC）および防御プロトコルを網羅。",
+        badge: "Cisco Verified",
+        credlyId: "0ba890de-f433-4cc8-a212-9ed6223ab23b",
+        link: "https://www.credly.com/badges/0ba890de-f433-4cc8-a212-9ed6223ab23b/public_url",
+      },
+      {
+        title: "NiX・IT日本語-Zero",
+        period: "2024年",
+        issuer: "株式会社ウィザス",
+        desc: "ITエンジニア向け日本語能力認定。システム開発現場での専門用語、日系企業における業務遂行とビジネスマナーを習得。",
+        badge: "Withus Verified",
+        credlyId: "0a8cd209-0f3f-4bdf-a598-a563dc36b99f",
+        link: "https://www.credly.com/badges/0a8cd209-0f3f-4bdf-a598-a563dc36b99f/public_url",
+      },
+      {
+        title: "NiX-JPN-20-専門日本語５ (IT日本語レベル5)",
+        period: "2024年",
+        issuer: "株式会社ウィザス",
+        desc: "専門日本語レベル5認定。仕様書や設計書の読解・作成、技術ミーティングでの円滑な意思疎通と開発議論を証明。",
+        badge: "Withus Verified",
+        credlyId: "657d5b06-0573-4c50-ae7a-295abc486ea6",
+        link: "https://www.credly.com/badges/657d5b06-0573-4c50-ae7a-295abc486ea6/public_url",
+      },
+      {
+        title: "NiX-JPN-6-基礎日本語５ (基礎日本語レベル5)",
+        period: "2024年",
+        issuer: "株式会社ウィザス",
+        desc: "基礎日本語レベル5認定。高度な日常会話力、リスニング理解力、多文化環境におけるチームコラボレーション能力を証明。",
+        badge: "Withus Verified",
+        credlyId: "11f987ba-0243-4f38-99bc-cd938d3da17f",
+        link: "https://www.credly.com/badges/11f987ba-0243-4f38-99bc-cd938d3da17f/public_url",
       },
     ],
     projectsTitle: "主なプロジェクト",
@@ -1033,8 +1211,9 @@ export const content: Record<string, LangContent> = {
     footer: "© 2026 タイ・グエン・バオ・ルアン。無断転載を禁じます。",
     nav: {
       about: "自己紹介",
-      skills: "スキル",
       experience: "経歴",
+      certifications: "資格・受賞",
+      skills: "スキル",
       projects: "プロジェクト",
       contact: "連絡先",
     },

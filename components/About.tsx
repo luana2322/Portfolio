@@ -28,16 +28,19 @@ export default function About({ content }: AboutProps) {
       value: content.stats.experience,
       label: content.stats.experienceLabel,
       color: "from-sky-500 to-cyan-500",
+      href: "#experience",
     },
     {
       value: content.stats.projects,
       label: content.stats.projectsLabel,
       color: "from-cyan-500 to-teal-500",
+      href: "#projects",
     },
     {
       value: content.stats.awards,
       label: content.stats.awardsLabel,
       color: "from-amber-500 to-orange-500",
+      href: "#certifications",
     },
     {
       value: content.stats.dedication,
@@ -76,35 +79,43 @@ export default function About({ content }: AboutProps) {
             transition={{ delay: 0.2 }}
             className="mt-3 text-sm sm:text-base text-slate-600 dark:text-slate-400"
           >
-            Kỹ sư phần mềm hướng đến hiệu năng, giải pháp kiến trúc tối ưu và trải nghiệm số hoàn mỹ.
+            {content.bio}
           </motion.p>
         </div>
 
         {/* 4 Key Metrics / Stats Cards */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-16">
-          {statsList.map((stat, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              whileHover={{ y: -4 }}
-              className="p-6 rounded-2xl glass-panel relative overflow-hidden group shadow-lg shadow-black/5 hover:border-sky-500/40 transition-all duration-300"
-            >
-              <div
-                className={`absolute top-0 right-0 w-24 h-24 bg-gradient-to-br ${stat.color} opacity-10 rounded-full blur-2xl group-hover:opacity-25 transition-opacity`}
-              />
-              <span
-                className={`text-3xl sm:text-4xl font-extrabold bg-gradient-to-r ${stat.color} bg-clip-text text-transparent block mb-1`}
+          {statsList.map((stat, index) => {
+            const Wrapper = stat.href ? 'a' : 'div';
+            return (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                whileHover={{ y: -4 }}
+                className="h-full"
               >
-                {stat.value}
-              </span>
-              <span className="text-xs sm:text-sm font-medium text-slate-600 dark:text-slate-400 leading-snug block">
-                {stat.label}
-              </span>
-            </motion.div>
-          ))}
+                <Wrapper
+                  {...(stat.href ? { href: stat.href } : {})}
+                  className="block h-full p-6 rounded-2xl glass-panel relative overflow-hidden group shadow-lg shadow-black/5 hover:border-sky-500/40 transition-all duration-300"
+                >
+                  <div
+                    className={`absolute top-0 right-0 w-24 h-24 bg-gradient-to-br ${stat.color} opacity-10 rounded-full blur-2xl group-hover:opacity-25 transition-opacity`}
+                  />
+                  <span
+                    className={`text-3xl sm:text-4xl font-extrabold bg-gradient-to-r ${stat.color} bg-clip-text text-transparent block mb-1`}
+                  >
+                    {stat.value}
+                  </span>
+                  <span className="text-xs sm:text-sm font-medium text-slate-600 dark:text-slate-400 leading-snug block">
+                    {stat.label}
+                  </span>
+                </Wrapper>
+              </motion.div>
+            );
+          })}
         </div>
 
         {/* Main 2-Column Content */}

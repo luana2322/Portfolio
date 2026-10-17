@@ -22,6 +22,7 @@ interface NavbarProps {
     about: string;
     skills: string;
     experience: string;
+    certifications?: string;
     projects: string;
     contact: string;
   };
@@ -58,8 +59,9 @@ export default function Navbar({
   const navLinks = [
     { href: "#about", label: nav.about },
     { href: "#experience", label: nav.experience },
-    { href: "#projects", label: nav.projects },
+    ...(nav.certifications ? [{ href: "#certifications", label: nav.certifications }] : []),
     { href: "#skills", label: nav.skills },
+    { href: "#projects", label: nav.projects },
     { href: "#contact", label: nav.contact },
   ];
 
